@@ -2,7 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
