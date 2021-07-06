@@ -11,15 +11,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
   public class AutomationProject2 {
     public static void main(String[] args) throws IOException, InterruptedException {
 //      1. Launch Chrome browser.
           System.setProperty("webdriver.chrome.driver","/Users/cristianfortuna/Documents/drivers/chromedriver ");
           WebDriver wd = new ChromeDriver();
           wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
 //      2. Navigate to http://secure.smartbearsoftware.com/samples/TestComplete12/WebOrders/Login.aspx
           wd.navigate().to("http://secure.smartbearsoftware.com/samples/TestComplete12/WebOrders/Login.aspx");
           Thread.sleep(2000);
@@ -45,17 +46,17 @@ import static org.testng.Assert.assertTrue;
         If the quantity is 20, the Total should be 1840.
         If the quantity is 77, the Total should be 7084. And so on.
  */       String value = wd.findElement(By.id("ctl00_MainContent_fmwOrder_txtTotal")).getAttribute("value");
-        double actualTotalValue = Double.parseDouble(value);
-        double expectedTotalValue = 0;
-        if (randomQuantity > 10) {
+          double actualTotalValue = Double.parseDouble(value);
+          double expectedTotalValue = 0;
+          if (randomQuantity > 10) {
             expectedTotalValue = randomQuantity * 100 - (randomQuantity * 100 * 0.08);
-        } else if (randomQuantity < 10 && randomQuantity > 0) {
+          } else if (randomQuantity < 10 && randomQuantity > 0) {
             expectedTotalValue = randomQuantity * 100;
-        } else {
+          } else {
             expectedTotalValue = 0;
-        }
-        assertTrue(actualTotalValue == expectedTotalValue);
-        Thread.sleep(2000);
+          }
+          assertTrue(actualTotalValue == expectedTotalValue);
+          Thread.sleep(2000);
 
 /*      6. Generate and enter random first name and last name.
         7. Generate and Enter random street address
@@ -66,32 +67,32 @@ import static org.testng.Assert.assertTrue;
         EXTRA: As an extra challenge, for steps 6-10 download 1000 row of corresponding realistic data from mockaroo.com
         in a csv format and load it to your program and use the random set of data from there each time.
 */        List<String[]> list = new ArrayList<>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("MOCK_DATA.csv"));
-        String line;
-        while((line = bufferedReader.readLine()) != null ){
+          BufferedReader bufferedReader = new BufferedReader(new FileReader("MOCK_DATA.csv"));
+          String line;
+          while((line = bufferedReader.readLine()) != null ){
             String[] split = line.split(",");
             list.add(split);
-        }
-        String[] randomMockData = null;
-        for (int i = 1; i < list.size(); i++){
+          }
+          String[] randomMockData = null;
+          for (int i = 1; i < list.size(); i++){
             int randomIndex = (int)(Math.random()* list.size()-1)+1;
             randomMockData = list.get(randomIndex);
-        }
-        wd.findElement(By.id("ctl00_MainContent_fmwOrder_txtName")).sendKeys(randomMockData[0]+" "+randomMockData[1],
+          }
+          wd.findElement(By.id("ctl00_MainContent_fmwOrder_txtName")).sendKeys(randomMockData[0]+" "+randomMockData[1],
                 Keys.TAB, randomMockData[2], Keys.TAB, randomMockData[3], Keys.TAB, randomMockData[4], Keys.TAB, randomMockData[5]);
-        Thread.sleep(2000);
+          Thread.sleep(2000);
 
 //       11. Select the card type randomly. On each run your script should select a random type.
           String[] cardTypeId = {"ctl00_MainContent_fmwOrder_cardList_0",
                 "ctl00_MainContent_fmwOrder_cardList_1",
                 "ctl00_MainContent_fmwOrder_cardList_2"};
-        String randomCardTypeId = null;
-        for (int i = 0; i < cardTypeId.length; i++){
+          String randomCardTypeId = null;
+          for (int i = 0; i < cardTypeId.length; i++){
             int randomIndex = (int)(Math.random()* cardTypeId.length);
             randomCardTypeId = cardTypeId[randomIndex];
-        }
-        wd.findElement(By.id(randomCardTypeId)).click();
-        Thread.sleep(2000);
+          }
+          wd.findElement(By.id(randomCardTypeId)).click();
+          Thread.sleep(2000);
 
 /*      12. Generate and enter the random card number:
         If Visa is selected, the card number should start with 4.
@@ -99,21 +100,21 @@ import static org.testng.Assert.assertTrue;
         If American Express is selected, card number should start with 3.
         Card numbers should be 16 digits for Visa and MasterCard, 15 for American Express.
 */        String randomCardNo = "";
-        Random randomNum = new Random();
-        for (int i = 0; i < 15; i++) {
+          Random randomNum = new Random();
+          for (int i = 0; i < 15; i++) {
             randomCardNo += randomNum.nextInt(10);
-        }
-        String inputtedCardNumber;
-        if (randomCardTypeId.equals("ctl00_MainContent_fmwOrder_cardList_0")){
+          }
+          String inputtedCardNumber;
+          if (randomCardTypeId.equals("ctl00_MainContent_fmwOrder_cardList_0")){
             inputtedCardNumber = "4" + randomCardNo;
             wd.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox6")).sendKeys(inputtedCardNumber);
-        }else if(randomCardTypeId.equals("ctl00_MainContent_fmwOrder_cardList_1")) {
+          }else if(randomCardTypeId.equals("ctl00_MainContent_fmwOrder_cardList_1")) {
             inputtedCardNumber = "5" + randomCardNo;
             wd.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox6")).sendKeys(inputtedCardNumber);
-        }else {
+          }else {
             inputtedCardNumber = "3" + randomCardNo.substring(1);
             wd.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox6")).sendKeys(inputtedCardNumber);
-        }
+          }
           String cardType = wd.findElement(By.id(randomCardTypeId)).getAttribute("value");
           Thread.sleep(2000);
 
@@ -137,14 +138,14 @@ import static org.testng.Assert.assertTrue;
 /*      17. The placed order details appears on the first row of the orders table. Verify that the entire information
         contained on the row (Name, Product, Quantity, etc) matches the previously entered information in previous steps.
 */        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        String todaysDate= formatter.format(date);
-        String actualFirstRowOfTr = wd.findElements(By.tagName("tr")).get(2).getText();
-        String expectedFirstRowOfTr = randomMockData[0]+" "+randomMockData[1]+" "+product+" "+randomQuantity+" "
+          SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+          String todaysDate= formatter.format(date);
+          String actualFirstRowOfTr = wd.findElements(By.tagName("tr")).get(2).getText();
+          String expectedFirstRowOfTr = randomMockData[0]+" "+randomMockData[1]+" "+product+" "+randomQuantity+" "
                 +todaysDate+" "+randomMockData[2]+" "+randomMockData[3]+" "+randomMockData[4]+" "
                 +randomMockData[5]+" "+cardType+" "+inputtedCardNumber+" "+expireDate;
-        assertEquals(actualFirstRowOfTr, expectedFirstRowOfTr);
-        Thread.sleep(2000);
+          assertEquals(actualFirstRowOfTr, expectedFirstRowOfTr);
+          Thread.sleep(2000);
 
 //      18. Log out of the application.
           wd.findElement(By.id("ctl00_logout")).click();
