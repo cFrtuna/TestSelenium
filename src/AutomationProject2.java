@@ -71,7 +71,7 @@ public class AutomationProject2 {
         wd.findElement(By.id("ctl00_MainContent_fmwOrder_txtName")).sendKeys(randomMockData[0]+" "+randomMockData[1],
                 Keys.TAB, randomMockData[2], Keys.TAB, randomMockData[3], Keys.TAB, randomMockData[4], Keys.TAB, randomMockData[5]);
 //
-//      11. Select the card type randomly. On each run your script should select a random type.
+//       11. Select the card type randomly. On each run your script should select a random type.
         String[] cardTypeId = {"ctl00_MainContent_fmwOrder_cardList_0",
                 "ctl00_MainContent_fmwOrder_cardList_1",
                 "ctl00_MainContent_fmwOrder_cardList_2"};
