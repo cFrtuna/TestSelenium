@@ -72,7 +72,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jar_files" level="project" />
+    <orderEntry type="library" exported="" name="jar_files" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>

@@ -39,6 +39,7 @@ import static org.testng.Assert.assertTrue;
           wd.findElement(By.id("ctl00_MainContent_fmwOrder_txtQuantity"))
                 .sendKeys(Keys.BACK_SPACE, String.valueOf(randomQuantity), Keys.ENTER);
           Thread.sleep(2000);
+        System.out.println(randomQuantity);
 
 /*      6. Click on Calculate and verify that the Total value is correct.
         Price per unit is 100.  The discount of 8 % is applied to quantities of 10+.
@@ -57,6 +58,7 @@ import static org.testng.Assert.assertTrue;
           }
           assertTrue(actualTotalValue == expectedTotalValue);
           Thread.sleep(2000);
+        System.out.println(expectedTotalValue);
 
 /*      6. Generate and enter random first name and last name.
         7. Generate and Enter random street address
@@ -81,6 +83,7 @@ import static org.testng.Assert.assertTrue;
           wd.findElement(By.id("ctl00_MainContent_fmwOrder_txtName")).sendKeys(randomMockData[0]+" "+randomMockData[1],
                 Keys.TAB, randomMockData[2], Keys.TAB, randomMockData[3], Keys.TAB, randomMockData[4], Keys.TAB, randomMockData[5]);
           Thread.sleep(2000);
+        System.out.println(randomMockData[4]);
 
 //       11. Select the card type randomly. On each run your script should select a random type.
           String[] cardTypeId = {"ctl00_MainContent_fmwOrder_cardList_0",
@@ -117,11 +120,13 @@ import static org.testng.Assert.assertTrue;
           }
           String cardType = wd.findElement(By.id(randomCardTypeId)).getAttribute("value");
           Thread.sleep(2000);
+        System.out.println(inputtedCardNumber);
 
 //      13. Enter a valid expiration date (newer than the current date)
           String expireDate = "12/22";
           wd.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox1")).sendKeys(expireDate);
           Thread.sleep(2000);
+        System.out.println(expireDate);
 
 //      14. Click on Process
           wd.findElement(By.id("ctl00_MainContent_fmwOrder_InsertButton")).click();
@@ -142,10 +147,12 @@ import static org.testng.Assert.assertTrue;
           String todaysDate= formatter.format(date);
           String actualFirstRowOfTr = wd.findElements(By.tagName("tr")).get(2).getText();
           String expectedFirstRowOfTr = randomMockData[0]+" "+randomMockData[1]+" "+product+" "+randomQuantity+" "
-                +todaysDate+" "+randomMockData[2]+" "+randomMockData[3]+" "+randomMockData[4]+" "
+                  +todaysDate+" "+randomMockData[2]+" "+randomMockData[3]+" "+randomMockData[4]+" "
                 +randomMockData[5]+" "+cardType+" "+inputtedCardNumber+" "+expireDate;
           assertEquals(actualFirstRowOfTr, expectedFirstRowOfTr);
           Thread.sleep(2000);
+        System.out.println(actualFirstRowOfTr);
+        System.out.println(expectedFirstRowOfTr);
 
 //      18. Log out of the application.
           wd.findElement(By.id("ctl00_logout")).click();
