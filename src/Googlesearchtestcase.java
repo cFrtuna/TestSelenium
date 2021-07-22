@@ -8,7 +8,7 @@ import org.testng.Assert;
 public class Googlesearchtestcase {
 
     public static void main (String[] args){
-Sel sel =new Sel();
+ByID sel =new ByID();
 
         System.setProperty("webdriver.chrome.driver", "/Users/cristianfortuna/Documents/drivers/chromedriver ");
         WebDriver driver = new ChromeDriver(); // launches a new browser session
